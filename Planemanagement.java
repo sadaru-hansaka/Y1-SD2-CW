@@ -12,6 +12,9 @@ public class Planemanagement {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
+    //ticket array to list all the booked seat details and person details.
+    public static Ticket[] tickets=new Ticket[52];
+
     //main class
     public static void main(String[] ags) {
         System.out.println("\nWelcome to the Plane Management application!\n"); //welcome msg , appear when starts the code
@@ -24,7 +27,7 @@ public class Planemanagement {
                 int menu_choice = input.nextInt(); //assign input to menu_choice
                 switch (menu_choice) {
                     case 1:
-
+                        buy_seat();
                         break;
                     case 2:
 
