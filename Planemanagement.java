@@ -154,4 +154,17 @@ public class Planemanagement {
 
         }
     }
+
+    //calculate ticket price
+    public static int calculate_price(int seat_column){
+        int price = 0;
+        if (seat_column <= 5) {
+            price = 200;
+        } else if (seat_column <= 9) {
+            price = 150;
+        } else {
+            price = 180;
+        }
+        return price;
+    }
 }
