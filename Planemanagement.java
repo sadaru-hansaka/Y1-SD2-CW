@@ -167,4 +167,75 @@ public class Planemanagement {
         }
         return price;
     }
+
+    //    cancel a seat
+    //from this method asks for user to enter seat roe and number than user want to cancel and if it is booked, the seat
+    //will remove from the 2d array and mark as a not booked. And remove ticket details from the ticket array
+    public static void cancel_seat() {
+        System.out.println("Enter seat row and number that you want to cancel.\n");
+        while (true) {
+            try{
+                System.out.print("Enter seat row letter(A/B/C/D) :");
+                char cancel_seat_row = Character.toUpperCase(input.next().charAt(0));
+
+                //check the entered seat row is valid and return an index
+                int rowIndex = -1;
+                switch (cancel_seat_row) {
+                    case 'A':
+                        rowIndex = 0;
+                        break;
+                    case 'B':
+                        rowIndex = 1;
+                        break;
+                    case 'C':
+                        rowIndex = 2;
+                        break;
+                    case 'D':
+                        rowIndex = 3;
+                        break;
+                    default:
+                        System.out.println("Invalid seat row enter a valid row.");
+                        continue;  //again goes to begin
+                }
+
+                System.out.print("Enter seat number :");
+                int cancel_seat_column = input.nextInt();
+
+                //checks the entered seat number is valid using seating order 2D array
+                if (cancel_seat_column < 1 || cancel_seat_column > seat_order[rowIndex].length) {
+                    System.out.println("Invalid seat number. Please enter row and seat number again");
+                    continue;
+                }
+
+                //if the entered seat is booked it change to not booked( 1 to 0 )
+                if (cancel_seat_column - 1 <= seat_order[rowIndex].length) {
+                    if (seat_order[rowIndex][cancel_seat_column - 1] == 1) {
+                        seat_order[rowIndex][cancel_seat_column - 1] = 0;
+                        System.out.println("\nSeat Successfully Canceled");
+                    } else {
+                        System.out.println("\nSorry Seat not booked!");
+                    }
+                }
+
+                //remove ticket information from the ticket array
+                int remove_index = -1;
+                for (int n = 0; n < tickets.length; n++) {
+                    Ticket ticket = tickets[n];
+                    if (tickets[n] != null && ticket.getRow() == cancel_seat_row && ticket.getSeat() == cancel_seat_column) {
+                        remove_index = n;
+                        break;
+                    }
+                }
+                if (remove_index != -1) {
+                    tickets[remove_index] = null;
+                }
+                break; // breaks the loop
+
+                //when the user inputs a letter to seat number program not crash and display an error msg
+            }catch (InputMismatchException e){
+                System.out.println("\nEnter a valid input for seat number!\n");
+                input.next();
+            }
+        }
+    }
 }
