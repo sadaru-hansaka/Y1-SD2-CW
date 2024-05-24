@@ -30,10 +30,10 @@ public class Planemanagement {
                         buy_seat();
                         break;
                     case 2:
-
+                        cancel_seat();
                         break;
                     case 3:
-
+                        find_first_available();
                         break;
                     case 4:
 
@@ -237,5 +237,23 @@ public class Planemanagement {
                 input.next();
             }
         }
+    }
+
+    //    find first available seat
+    //checks the sea_order array and search for first 0, and get the index according to the index this method displays first available seat
+    //this checks row by row
+    public static void find_first_available() {
+        System.out.print("\nFirst available seat is : ");
+        char[] row_letter = {'A','B','C','D'};
+        for (int i = 0; i <= (seat_order.length) - 1; i++) {
+            for (int x = 0; x <= (seat_order[i].length) - 1; x++) {
+                if (seat_order[i][x] == 0) {
+                    System.out.println(row_letter[i] + "" + (x + 1) + "\n");
+                    return;
+                }
+            }
+            System.out.println();
+        }
+
     }
 }
