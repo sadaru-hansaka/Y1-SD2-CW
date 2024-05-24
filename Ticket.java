@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import  java.io.*;
 public class Ticket {
     private char row;
@@ -28,19 +29,6 @@ public class Ticket {
         this.seat=seat;
     }
 
-    public int getPrice(){
-        return price;
-    }
-    public void setPrice(int price){
-        this.price=price;
-    }
-
-    public Person getPerson(){
-        return person;
-    }
-    public void setPerson(Person person){
-        this.person=person;
-    }
 
 }
 
