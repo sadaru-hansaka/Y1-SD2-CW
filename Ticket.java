@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import  java.io.*;
 public class Ticket {
     private char row;
@@ -30,5 +29,37 @@ public class Ticket {
     }
 
 
+
+    public void print_tickets(){
+        System.out.println("Row   : "+ row);
+        System.out.println("Seat  : "+ seat);
+        System.out.println("Price : £"+ price);
+        person.print_person_info();
+
+    }
+
+    //create a txt file to each booked ticket
+    //get text file name from seat row and number and write ticket information
+    public void save() {
+        String txt_filename = row + String.valueOf(seat) + ".txt";
+        File file = new File(txt_filename);
+        try {
+            boolean file_created = file.createNewFile();
+            if(file_created) {
+                FileWriter txt_file = new FileWriter(txt_filename);
+                txt_file.write("-Ticket Information-\n\n");
+                txt_file.write("Seat    : "+row + seat + "\n");
+                txt_file.write("Price   : £"+ price + "\n");
+                txt_file.write("\nPersonal Information :-\n");
+                txt_file.write("Name    : "+person.getName()+ "\n");
+                txt_file.write("Surname : "+person.getSurname()+"\n");
+                txt_file.write("Email   : "+person.getEmail()+"\n");
+                txt_file.write("\nSafe Flight !");
+                txt_file.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Error occurred!");
+        }
+    }
 }
 
