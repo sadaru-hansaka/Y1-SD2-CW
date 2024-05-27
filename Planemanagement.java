@@ -36,11 +36,11 @@ public class Planemanagement {
                         find_first_available();
                         break;
                     case 4:
-
+                        show_seating_plan();
                         break;
                     case 5:
                         System.out.println("Ticket Information :-\n");
-
+                        print_tickets_info();
                         break;
                     case 6:
                         System.out.println("Search ticket");
@@ -169,8 +169,8 @@ public class Planemanagement {
     }
 
     //    cancel a seat
-    //from this method asks for user to enter seat roe and number than user want to cancel and if it is booked, the seat
-    //will remove from the 2d array and mark as a not booked. And remove ticket details from the ticket array
+    /*from this method asks for user to enter seat roe and number than user want to cancel and if it is booked, the seat
+    /will remove from the 2d array and mark as a not booked. And remove ticket details from the ticket array*/
     public static void cancel_seat() {
         System.out.println("Enter seat row and number that you want to cancel.\n");
         while (true) {
@@ -239,9 +239,9 @@ public class Planemanagement {
         }
     }
 
-    //    find first available seat
-    //checks the sea_order array and search for first 0, and get the index according to the index this method displays first available seat
-    //this checks row by row
+    /*find first available seat
+    checks the sea_order array and search for first 0, and get the index according to the index this method displays first available seat
+    this checks row by row*/
     public static void find_first_available() {
         System.out.print("\nFirst available seat is : ");
         char[] row_letter = {'A','B','C','D'};
@@ -256,4 +256,38 @@ public class Planemanagement {
         }
 
     }
+
+    /*show seat planing method
+    from this method displays the booked and not booked seats using "O" and "X".
+    if the seat is booked this will show as "X"*/
+    public static void show_seating_plan() {
+        System.out.println("\nThis is the seating plan of this session :-\n");
+        System.out.println("O - Available seats\nX - Booked seats");
+        for (int i = 0; i <= (seat_order.length) - 1; i++) {
+            for (int x = 0; x <= (seat_order[i].length) - 1; x++) {
+                int out = seat_order[i][x];
+                if (out == 0) {
+                    System.out.print("O ");
+                } else {
+                    System.out.print("X ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    //print ticket information
+    /*from this method program displays all the booked seat's information which is stored to ticket array*/
+    public static void print_tickets_info(){
+        int total=0;
+        for(int k=0;k<=(tickets.length-1);k++){
+            if(tickets[k]!=null) {
+                tickets[k].print_tickets();
+                System.out.println("____________________________________________");
+                total=total+tickets[k].getPrice();
+            }
+        }
+        System.out.println("Total sales during this session : £"+total+"\n"); //after print ticket details the total sales of the session displays
+    }
+
 }
