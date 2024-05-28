@@ -44,7 +44,7 @@ public class Planemanagement {
                         break;
                     case 6:
                         System.out.println("Search ticket");
-
+                        search_ticket();
                         break;
                     case 0:
                         System.out.println("Thank you for visiting us....");
@@ -288,6 +288,69 @@ public class Planemanagement {
             }
         }
         System.out.println("Total sales during this session : £"+total+"\n"); //after print ticket details the total sales of the session displays
+    }
+
+    // search ticket method foe input number 5
+    //from this method user can see the booked seat details and user details from entering seat row and seat number
+    public static void search_ticket(){
+        System.out.println("Enter seat row and number that you want to search.\n");
+        while (true) {
+            try{
+                System.out.print("Enter row letter (A/B/C/D) : ");
+                char search_row = Character.toUpperCase(input.next().charAt(0));
+
+                int rowIndex = -1;
+                switch (search_row) {
+                    case 'A':
+                        rowIndex = 0;
+                        break;
+                    case 'B':
+                        rowIndex = 1;
+                        break;
+                    case 'C':
+                        rowIndex = 2;
+                        break;
+                    case 'D':
+                        rowIndex = 3;
+                        break;
+                    default:
+                        System.out.println("Invalid seat row enter a valid row.");
+                        continue;
+                }
+
+                System.out.print("Enter seat number : ");
+                int search_column = input.nextInt();
+
+                if(search_column < 1 || search_column > seat_order[rowIndex].length) {
+                    System.out.println("Invalid seat number. Please enter row and seat number again");
+                    continue;
+                }
+
+                if (search_column <= seat_order[rowIndex].length) {
+                    if (seat_order[rowIndex][search_column - 1] == 1) {
+
+                        int search_index = -1;
+                        for (int n = 0; n <= tickets.length; n++) {
+                            Ticket ticket = tickets[n];
+                            if (tickets[n] != null && ticket.getRow() == search_row && ticket.getSeat() == search_column) {
+                                search_index = n;
+                                break;
+                            }
+                        }
+                        if (search_index != -1) {
+                            tickets[search_index].print_tickets();
+                        }
+
+                    } else {
+                        System.out.println("\nThis seat is not booked");
+                    }
+                }
+                break;
+            }catch (InputMismatchException e){
+                System.out.println("\nEnter a valid input for seat number!\n");
+                input.next();
+            }
+        }
     }
 
 }
